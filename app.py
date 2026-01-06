@@ -50,26 +50,31 @@ with st.sidebar:
     )
     
     # Vérification des clés API
+    # Les clés sont lues depuis les variables d'environnement (.env ou secrets Streamlit Cloud)
+    # Les champs ci-dessous permettent de surcharger temporairement la clé si nécessaire
     if llm_provider == "openai":
         api_key = st.text_input(
-            "OpenAI API Key",
+            "OpenAI API Key (optionnel)",
             type="password",
             value="",
-            help="Définissez OPENAI_API_KEY dans les variables d'environnement ou saisissez-la ici"
+            key=f"api_key_openai_{llm_provider}",
+            help="La clé est chargée depuis les variables d'environnement. Saisissez ici uniquement pour tester une autre clé."
         )
     elif llm_provider == "claude":
         api_key = st.text_input(
-            "Anthropic API Key",
+            "Anthropic API Key (optionnel)",
             type="password",
             value="",
-            help="Définissez ANTHROPIC_API_KEY dans les variables d'environnement ou saisissez-la ici"
+            key=f"api_key_claude_{llm_provider}",
+            help="La clé est chargée depuis les variables d'environnement. Saisissez ici uniquement pour tester une autre clé."
         )
     else:
         api_key = st.text_input(
-            "Google AI (Gemini) API Key",
+            "Google AI (Gemini) API Key (optionnel)",
             type="password",
             value="",
-            help="Définissez GOOGLE_API_KEY dans les variables d'environnement ou saisissez-la ici"
+            key=f"api_key_google_{llm_provider}",
+            help="La clé est chargée depuis les variables d'environnement. Saisissez ici uniquement pour tester une autre clé."
         )
 
     # Appliquer les choix de la sidebar à la configuration globale
