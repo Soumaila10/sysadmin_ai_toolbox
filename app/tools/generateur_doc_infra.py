@@ -75,3 +75,6 @@ class GenerateurDocInfra:
                 return True
         return False
 
+
+
+

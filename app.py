@@ -6,6 +6,11 @@ Interface Streamlit pour les 5 outils IA DevOps
 import streamlit as st
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Charger les variables d'environnement depuis .env
+load_dotenv()
+
 from app.config.config import Config
 from app.tools.analyseur_logs import AnalyseurLogs
 from app.tools.generateur_scripts import GenerateurScripts
@@ -32,10 +37,16 @@ with st.sidebar:
     st.header("⚙️ Configuration")
     
     # Sélection du fournisseur LLM
+    providers = ["openai", "claude", "google"]
+    try:
+        default_index = providers.index(Config.LLM_PROVIDER) if Config.LLM_PROVIDER in providers else 0
+    except (ValueError, AttributeError):
+        default_index = 0
+    
     llm_provider = st.selectbox(
         "Fournisseur LLM",
-        ["openai", "claude"],
-        index=0 if Config.LLM_PROVIDER == "openai" else 1
+        providers,
+        index=default_index
     )
     
     # Vérification des clés API
@@ -46,13 +57,30 @@ with st.sidebar:
             value=Config.OPENAI_API_KEY or "",
             help="Définissez OPENAI_API_KEY dans les variables d'environnement"
         )
-    else:
+    elif llm_provider == "claude":
         api_key = st.text_input(
             "Anthropic API Key",
             type="password",
             value=Config.ANTHROPIC_API_KEY or "",
             help="Définissez ANTHROPIC_API_KEY dans les variables d'environnement"
         )
+    else:
+        api_key = st.text_input(
+            "Google AI (Gemini) API Key",
+            type="password",
+            value=Config.GOOGLE_API_KEY or "",
+            help="Définissez GOOGLE_API_KEY dans les variables d'environnement"
+        )
+
+    # Appliquer les choix de la sidebar à la configuration globale
+    # (permet d'utiliser le fournisseur et la clé sélectionnés sans redémarrer)
+    Config.LLM_PROVIDER = llm_provider
+    if llm_provider == "openai":
+        Config.OPENAI_API_KEY = api_key or Config.OPENAI_API_KEY
+    elif llm_provider == "claude":
+        Config.ANTHROPIC_API_KEY = api_key or Config.ANTHROPIC_API_KEY
+    else:
+        Config.GOOGLE_API_KEY = api_key or Config.GOOGLE_API_KEY
     
     st.divider()
     

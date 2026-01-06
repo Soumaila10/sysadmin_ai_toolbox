@@ -75,3 +75,6 @@ class TroubleshootingReseau:
                 return True
         return False
 
+
+
+

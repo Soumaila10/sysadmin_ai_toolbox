@@ -12,6 +12,7 @@ class LLMProvider(str, Enum):
     """Fournisseurs de LLM supportés"""
     OPENAI = "openai"
     CLAUDE = "claude"
+    GOOGLE = "google"
 
 
 class Config:
@@ -21,10 +22,12 @@ class Config:
     LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", LLMProvider.OPENAI.value)
     OPENAI_API_KEY: Optional[str] = os.getenv("OPENAI_API_KEY")
     ANTHROPIC_API_KEY: Optional[str] = os.getenv("ANTHROPIC_API_KEY")
+    GOOGLE_API_KEY: Optional[str] = os.getenv("GOOGLE_API_KEY")
     
     # Modèles par défaut
     OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "gpt-4")
     CLAUDE_MODEL: str = os.getenv("CLAUDE_MODEL", "claude-3-5-sonnet-20241022")
+    GOOGLE_MODEL: str = os.getenv("GOOGLE_MODEL", "gemini-1.5-pro")
     
     # Paramètres de génération
     TEMPERATURE: float = float(os.getenv("TEMPERATURE", "0.3"))
@@ -43,6 +46,9 @@ class Config:
         elif cls.LLM_PROVIDER == LLMProvider.CLAUDE.value:
             if not cls.ANTHROPIC_API_KEY:
                 raise ValueError("ANTHROPIC_API_KEY doit être définie dans les variables d'environnement")
+        elif cls.LLM_PROVIDER == LLMProvider.GOOGLE.value:
+            if not cls.GOOGLE_API_KEY:
+                raise ValueError("GOOGLE_API_KEY doit être définie dans les variables d'environnement")
         else:
             raise ValueError(f"Fournisseur LLM non supporté: {cls.LLM_PROVIDER}")
         return True
@@ -54,5 +60,10 @@ class Config:
             return cls.OPENAI_API_KEY
         elif cls.LLM_PROVIDER == LLMProvider.CLAUDE.value:
             return cls.ANTHROPIC_API_KEY
+        elif cls.LLM_PROVIDER == LLMProvider.GOOGLE.value:
+            return cls.GOOGLE_API_KEY
         raise ValueError("Aucune clé API configurée")
+
+
+
 

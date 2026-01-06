@@ -75,3 +75,6 @@ class ArchitecteDockerK8s:
                 return True
         return False
 
+
+
+

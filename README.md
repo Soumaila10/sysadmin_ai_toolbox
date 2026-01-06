@@ -72,7 +72,7 @@ sysadmin_ai_toolbox/
 ### Prérequis
 
 - Python 3.8 ou supérieur
-- Clé API OpenAI ou Anthropic
+- Clé API OpenAI, Anthropic (Claude) ou Google AI (Gemini)
 
 ### Étapes d'installation
 
@@ -106,17 +106,20 @@ cp .env.example .env
 Créez un fichier `.env` à la racine du projet avec les variables suivantes :
 
 ```env
-# Fournisseur LLM: "openai" ou "claude"
+# Fournisseur LLM: "openai", "claude" ou "google"
 LLM_PROVIDER=openai
 
 # Clé API (selon le fournisseur choisi)
 OPENAI_API_KEY=your_openai_api_key_here
 # OU
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
+# OU
+GOOGLE_API_KEY=your_google_api_key_here
 
 # Modèles par défaut
 OPENAI_MODEL=gpt-4
 CLAUDE_MODEL=claude-3-5-sonnet-20241022
+GOOGLE_MODEL=gemini-1.5-pro
 
 # Paramètres de génération
 TEMPERATURE=0.3

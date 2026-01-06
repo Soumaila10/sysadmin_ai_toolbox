@@ -91,3 +91,6 @@ Structure ta réponse selon ce format :
 ## PROBLÈME RÉSEAU À RÉSOUDRE
 [Le problème de l'utilisateur sera inséré ici]
 
+
+
+

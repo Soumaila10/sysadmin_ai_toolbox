@@ -21,6 +21,12 @@ LLM_PROVIDER=claude
 ANTHROPIC_API_KEY=votre_cle_api_ici
 ```
 
+Ou pour Google AI (Gemini) :
+```env
+LLM_PROVIDER=google
+GOOGLE_API_KEY=votre_cle_api_ici
+```
+
 3. **Lancer l'application**
 ```bash
 streamlit run app.py
@@ -55,4 +61,7 @@ Pour modifier un prompt :
 - Implémenter les 4 autres outils
 - Tester et améliorer les prompts (v2, vFinal)
 - Documenter l'architecture et les choix techniques
+
+
+
 

@@ -91,3 +91,6 @@ sequenceDiagram
 ## INFORMATIONS SUR L'INFRASTRUCTURE
 [Les informations de l'utilisateur seront insérées ici]
 
+
+
+
