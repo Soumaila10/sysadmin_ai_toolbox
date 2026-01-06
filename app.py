@@ -54,22 +54,22 @@ with st.sidebar:
         api_key = st.text_input(
             "OpenAI API Key",
             type="password",
-            value=Config.OPENAI_API_KEY or "",
-            help="Définissez OPENAI_API_KEY dans les variables d'environnement"
+            value="",
+            help="Définissez OPENAI_API_KEY dans les variables d'environnement ou saisissez-la ici"
         )
     elif llm_provider == "claude":
         api_key = st.text_input(
             "Anthropic API Key",
             type="password",
-            value=Config.ANTHROPIC_API_KEY or "",
-            help="Définissez ANTHROPIC_API_KEY dans les variables d'environnement"
+            value="",
+            help="Définissez ANTHROPIC_API_KEY dans les variables d'environnement ou saisissez-la ici"
         )
     else:
         api_key = st.text_input(
             "Google AI (Gemini) API Key",
             type="password",
-            value=Config.GOOGLE_API_KEY or "",
-            help="Définissez GOOGLE_API_KEY dans les variables d'environnement"
+            value="",
+            help="Définissez GOOGLE_API_KEY dans les variables d'environnement ou saisissez-la ici"
         )
 
     # Appliquer les choix de la sidebar à la configuration globale
