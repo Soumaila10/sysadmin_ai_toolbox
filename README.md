@@ -123,7 +123,7 @@ GOOGLE_MODEL=gemini-1.5-pro
 
 # Paramètres de génération
 TEMPERATURE=0.3
-MAX_TOKENS=4000
+MAX_TOKENS=2000
 ```
 
 ### Configuration via Streamlit

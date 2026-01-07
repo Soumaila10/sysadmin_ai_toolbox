@@ -31,7 +31,7 @@ class Config:
     
     # Paramètres de génération
     TEMPERATURE: float = float(os.getenv("TEMPERATURE", "0.3"))
-    MAX_TOKENS: int = int(os.getenv("MAX_TOKENS", "4000"))
+    MAX_TOKENS: int = int(os.getenv("MAX_TOKENS", "2000"))
     
     # Chemins des fichiers
     PROMPTS_DIR: str = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "prompts")

@@ -22,7 +22,7 @@ from app.utils.prompt_loader import PromptLoader
 
 # Configuration de la page
 st.set_page_config(
-    page_title="AI-Powered Dev Toolkit",
+    page_title="AI-Powered AdminSysRes Toolkit",
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -47,7 +47,7 @@ def _load_secrets_into_config():
 _load_secrets_into_config()
 
 # Titre principal
-st.title("🤖 AI-Powered Dev Toolkit")
+st.title("🤖 AI-Powered AdminSysRes Toolkit")
 st.markdown("**Boîte à outils IA pour Administrateurs Système et DevOps**")
 
 # Sidebar - Configuration
@@ -591,7 +591,7 @@ st.divider()
 st.markdown(
     """
     <div style='text-align: center; color: #666;'>
-        <p>AI-Powered Dev Toolkit v1.0.0 | Projet de fin de formation</p>
+        <p>AI-Powered AdminSysRes Toolkit v1.0.0 | Projet de fin de formation</p>
     </div>
     """,
     unsafe_allow_html=True
