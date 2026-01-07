@@ -28,6 +28,24 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Injection des secrets Streamlit Cloud dans la config (priorité sur .env)
+def _load_secrets_into_config():
+    try:
+        if "LLM_PROVIDER" in st.secrets:
+            Config.LLM_PROVIDER = st.secrets["LLM_PROVIDER"]
+        if "OPENAI_API_KEY" in st.secrets:
+            Config.OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+        if "ANTHROPIC_API_KEY" in st.secrets:
+            Config.ANTHROPIC_API_KEY = st.secrets["ANTHROPIC_API_KEY"]
+        if "GOOGLE_API_KEY" in st.secrets:
+            Config.GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+    except Exception:
+        # En local, st.secrets peut être vide : on ignore silencieusement
+        pass
+
+
+_load_secrets_into_config()
+
 # Titre principal
 st.title("🤖 AI-Powered Dev Toolkit")
 st.markdown("**Boîte à outils IA pour Administrateurs Système et DevOps**")
@@ -50,32 +68,47 @@ with st.sidebar:
     )
     
     # Vérification des clés API
-    # Les clés sont lues depuis les variables d'environnement (.env ou secrets Streamlit Cloud)
-    # Les champs ci-dessous permettent de surcharger temporairement la clé si nécessaire
+    # Si une clé est fournie via st.secrets/.env, on ne pré-remplit rien mais on l'utilise automatiquement.
+    # Les champs ci-dessous permettent de surcharger temporairement la clé si nécessaire.
     if llm_provider == "openai":
-        api_key = st.text_input(
-            "OpenAI API Key (optionnel)",
-            type="password",
-            value="",
-            key=f"api_key_openai_{llm_provider}",
-            help="La clé est chargée depuis les variables d'environnement. Saisissez ici uniquement pour tester une autre clé."
-        )
+        secret_key = st.secrets.get("OPENAI_API_KEY") if hasattr(st, "secrets") else None
+        if secret_key:
+            api_key = secret_key
+            st.caption("Clé OpenAI fournie côté serveur (secrets).")
+        else:
+            api_key = st.text_input(
+                "OpenAI API Key (optionnel)",
+                type="password",
+                value="",
+                key=f"api_key_openai_{llm_provider}",
+                help="La clé est chargée depuis les variables d'environnement. Saisissez ici uniquement pour tester une autre clé."
+            )
     elif llm_provider == "claude":
-        api_key = st.text_input(
-            "Anthropic API Key (optionnel)",
-            type="password",
-            value="",
-            key=f"api_key_claude_{llm_provider}",
-            help="La clé est chargée depuis les variables d'environnement. Saisissez ici uniquement pour tester une autre clé."
-        )
+        secret_key = st.secrets.get("ANTHROPIC_API_KEY") if hasattr(st, "secrets") else None
+        if secret_key:
+            api_key = secret_key
+            st.caption("Clé Anthropic fournie côté serveur (secrets).")
+        else:
+            api_key = st.text_input(
+                "Anthropic API Key (optionnel)",
+                type="password",
+                value="",
+                key=f"api_key_claude_{llm_provider}",
+                help="La clé est chargée depuis les variables d'environnement. Saisissez ici uniquement pour tester une autre clé."
+            )
     else:
-        api_key = st.text_input(
-            "Google AI (Gemini) API Key (optionnel)",
-            type="password",
-            value="",
-            key=f"api_key_google_{llm_provider}",
-            help="La clé est chargée depuis les variables d'environnement. Saisissez ici uniquement pour tester une autre clé."
-        )
+        secret_key = st.secrets.get("GOOGLE_API_KEY") if hasattr(st, "secrets") else None
+        if secret_key:
+            api_key = secret_key
+            st.caption("Clé Google AI fournie côté serveur (secrets).")
+        else:
+            api_key = st.text_input(
+                "Google AI (Gemini) API Key (optionnel)",
+                type="password",
+                value="",
+                key=f"api_key_google_{llm_provider}",
+                help="La clé est chargée depuis les variables d'environnement. Saisissez ici uniquement pour tester une autre clé."
+            )
 
     # Appliquer les choix de la sidebar à la configuration globale
     # (permet d'utiliser le fournisseur et la clé sélectionnés sans redémarrer)
