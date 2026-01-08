@@ -2,6 +2,8 @@
 
 **Boîte à outils IA pour Administrateurs Système et DevOps**
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://soumaila10-sysadmin-ai-toolbox-app-1mb8v0.streamlit.app/)
+
 Application modulaire regroupant 5 outils IA dédiés aux tâches d'administration système et DevOps, avec versionnement des prompts pour documenter leur évolution.
 
 ## 📋 Table des matières
