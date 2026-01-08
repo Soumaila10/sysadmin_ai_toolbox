@@ -1,4 +1,4 @@
-# 🤖 AI-Powered Dev Toolkit
+# 🤖 AI-Powered SysRes Toolkit
 
 **Boîte à outils IA pour Administrateurs Système et DevOps**
 
@@ -241,7 +241,7 @@ Ce projet est un projet de fin de formation. Les contributions sont les bienvenu
 
 ## 👤 Auteur
 
-Projet de fin de formation - AI-Powered Dev Toolkit
+Projet de fin de formation - AI-Powered SysRes Toolkit
 
 ---
 
